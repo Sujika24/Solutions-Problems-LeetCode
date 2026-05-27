@@ -1,0 +1,57 @@
+class Solution {
+    public int numberOfSpecialChars(String word) {
+        int count=0;
+        HashMap<Character,Integer> h=new HashMap<>();
+        HashMap<Character,Integer> h1=new HashMap<>();
+        for(int i=0;i<word.length();i++){
+            char c=word.charAt(i);
+            if(Character.isLowerCase(c)){
+                h.put(c,i);
+            }else{
+                char ch=Character.toLowerCase(c);
+                if(!h1.containsKey(ch)){
+                    h1.put(ch,i);
+                }
+            }
+        }
+        for(char c:h.keySet()){
+            if(h1.containsKey(c)&&
+               h.get(c)<h1.get(c)) {
+                count++;
+            }
+        }
+        return count;
+    }
+}
+
+
+
+Example 1:
+
+Input: word = "aaAbcBC"
+
+Output: 3
+
+Explanation:
+
+The special characters are 'a', 'b', and 'c'.
+
+Example 2:
+
+Input: word = "abc"
+
+Output: 0
+
+Explanation:
+
+There are no special characters in word.
+
+Example 3:
+
+Input: word = "AbBCab"
+
+Output: 0
+
+Explanation:
+
+There are no special characters in word.
