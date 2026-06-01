@@ -1,0 +1,53 @@
+class Solution {
+    public int maxConsecutiveAnswers(String answerKey, int k) {
+       int n=answerKey.length();
+       char[] arr=answerKey.toCharArray();
+       int left=0;
+       int Tc=0;
+       int Fc=0;
+       int max=0;
+       for(int right=0;right<n;right++){
+        if(arr[right]=='T'){
+            Tc++;
+        }else{
+            Fc++;
+        } 
+        while(Math.min(Tc,Fc)>k){   
+            if(arr[left]=='T'){
+                Tc--;
+            }
+            else{
+                Fc--;
+            }
+            left++;    
+        }
+        int l=right-left+1;
+        if(l>max){
+            max=l;
+        }
+       }
+       return max;
+    }
+}
+
+
+
+
+Input: answerKey = "TTFF", k = 2
+Output: 4
+Explanation: We can replace both the 'F's with 'T's to make answerKey = "TTTT".
+There are four consecutive 'T's.
+Example 2:
+
+Input: answerKey = "TFFT", k = 1
+Output: 3
+Explanation: We can replace the first 'T' with an 'F' to make answerKey = "FFFT".
+Alternatively, we can replace the second 'T' with an 'F' to make answerKey = "TFFF".
+In both cases, there are three consecutive 'F's.
+Example 3:
+
+Input: answerKey = "TTFTTFTT", k = 1
+Output: 5
+Explanation: We can replace the first 'F' to make answerKey = "TTTTTFTT"
+Alternatively, we can replace the second 'F' to make answerKey = "TTFTTTTT". 
+In both cases, there are five consecutive 'T's.
