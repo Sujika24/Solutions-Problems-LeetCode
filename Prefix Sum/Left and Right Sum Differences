@@ -1,0 +1,36 @@
+class Solution {
+    public int[] leftRightDifference(int[] nums) {
+        int n=nums.length;
+        int prefix[]=new int[n];
+        prefix[0]=0;
+        for(int i=1;i<n;i++){
+            prefix[i]=prefix[i-1]+nums[i-1];
+        }
+        int suffix[]=new int[n];
+        suffix[n-1]=0;
+        for(int i=n-2;i>=0;i--){
+            suffix[i]=suffix[i+1]+nums[i+1];
+        }
+        for(int i=0;i<n;i++){
+            nums[i]=Math.abs(prefix[i]-suffix[i]);
+        }
+        return nums;
+    }
+}
+
+
+
+
+Example 1:
+
+Input: nums = [10,4,8,3]
+Output: [15,1,11,22]
+Explanation: The array leftSum is [0,10,14,22] and the array rightSum is [15,11,3,0].
+The array answer is [|0 - 15|,|10 - 11|,|14 - 3|,|22 - 0|] = [15,1,11,22].
+Example 2:
+
+Input: nums = [1]
+Output: [0]
+Explanation: The array leftSum is [0] and the array rightSum is [0].
+The array answer is [|0 - 0|] = [0].
+ 
